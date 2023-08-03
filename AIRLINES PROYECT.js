@@ -1,7 +1,7 @@
-let userName = '';  // Variable USUARIO : vacío, "a elegir"
-let totalCost = 0;  // Variable COSTE MEDIO : 0 -empezamos desde cero-
-let allLayoverFlights = 0 // Variable vuelos con ESCALA : 0 -empezamos desde cero-
-let allLastFlights = 0    // Variable ÚLTIMOS VUELOS : 0 -empieza desde cero-
+let userName = ''; 
+let totalCost = 0;  
+let allLayoverFlights = 0
+let allLastFlights = 0   
 
 
 const flights = [  // ARRAY PRINCIPAL
@@ -18,7 +18,6 @@ const flights = [  // ARRAY PRINCIPAL
   ];
 
 
-// 1 - INGRESO DE USUARIO + ALERT DE BIENVENIDA (OKEY):
 
 const askUserName = () => {
     userName = prompt('¡Bienvenid@ CODER! Ingresa aquí tu nombre de usuario para visualizar los vuelos: ');
@@ -33,7 +32,6 @@ const askUserName = () => {
 askUserName();
 
 
-// 2 - ALERT + IMPRESIÓN DE VUELOS DISPONIBLES (OKEY):
 
 const showAllFlights = () => {
     alert(`Estos son todos los vuelos que tenemos hoy disponibles en CODER Airlines, ${userName.toUpperCase()}:`);
@@ -52,7 +50,6 @@ const showAllFlights = () => {
 showAllFlights();
 
 
-// 3 - ALERT + IMPRESIÓN MEDIA DE LOS COSTES DE LOS VUELOS (OKEY):
 
 const averageCost = () => {
     for (i = 0; i < flights.length; i++) {
@@ -66,7 +63,6 @@ const averageCost = () => {
 averageCost();
 
 
-// 4 - ALERT + IMPRESIÓN DE VUELOS CON ESCALA (OKEY):
 
 const layoverFlights = () => {
     for (i = 0; i < flights.length; i++) {
@@ -88,7 +84,6 @@ const layoverFlights = () => {
 layoverFlights();
 
 
-// 5 - ALERT + IMPRESIÓN DE LOS ÚLTIMOS VUELOS DEL DÍA (OKEY):
 
 const lastFlights = () => {
     for (i = 0; i < flights.length; i++) {
