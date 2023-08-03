@@ -4,7 +4,7 @@ let allLayoverFlights = 0
 let allLastFlights = 0   
 
 
-const flights = [  // ARRAY PRINCIPAL
+const flights = [  
     { id: 00, to: "New York", from: "Barcelona", cost: 700, layover: false },
     { id: 01, to: "Los Angeles", from: "Madrid", cost: 1100, layover: true },
     { id: 02, to: "Paris", from: "Barcelona", cost: 210, layover: false },
