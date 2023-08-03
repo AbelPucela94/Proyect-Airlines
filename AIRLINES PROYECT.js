@@ -38,7 +38,7 @@ const showAllFlights = () => {
     console.log('                  ✈️   ALL FLIGHTS   ✈️                       ');
     console.log('---------------------------------------------------------------');
     for (i = 0; i < flights.length; i++) {
-        if (flights[i].layover === true) { // Es decir, imprime los vuelos que hacen ESCALA.
+        if (flights[i].layover === true) { 
             console.log(`El vuelo CON ESCALA con ID: ${flights[i].id}, de ORIGEN en ${flights[i].from} y DESTINO en ${flights[i].to}, tiene un COSTE de ${flights[i].cost}€`);
         } else { // Aquí estamos imprimiendo los que NO HACEN ESCALA.
             console.log(`El vuelo DIRECTO con ID: ${flights[i].id}, de ORIGEN en ${flights[i].from} y DESTINO en ${flights[i].to}, tiene un COSTE de ${flights[i].cost}€`);
