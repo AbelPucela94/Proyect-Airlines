@@ -21,7 +21,7 @@ const flights = [  // ARRAY PRINCIPAL
 // 1 - INGRESO DE USUARIO + ALERT DE BIENVENIDA (OKEY):
 
 const askUserName = () => {
-    userName = prompt('¡Bienvenido CODER! Ingresa aquí tu nombre de usuario para visualizar los vuelos: ');
+    userName = prompt('¡Bienvenid@ CODER! Ingresa aquí tu nombre de usuario para visualizar los vuelos: ');
     if (userName === '') {
         alert('ERROR 404: Nombre de usuario no válido. Vuelva a intentarlo');
         return askUserName();
