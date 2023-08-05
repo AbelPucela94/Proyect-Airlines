@@ -1,7 +1,7 @@
-let userName = ''; 
-let totalCost = 0;  
-let allLayoverFlights = 0
-let allLastFlights = 0   
+let userName = '';
+let totalCost = 0; 
+let allLayoverFlights = 0;
+let allLastFlights = 0;   
 
 
 const flights = [  
@@ -18,7 +18,6 @@ const flights = [
   ];
 
 
-
 const askUserName = () => {
     userName = prompt('¡Bienvenid@ CODER! Ingresa aquí tu nombre de usuario para visualizar los vuelos: ');
     if (userName === '') {
@@ -32,7 +31,6 @@ const askUserName = () => {
 askUserName();
 
 
-
 const showAllFlights = () => {
     alert(`Estos son todos los vuelos que tenemos hoy disponibles en CODER Airlines, ${userName.toUpperCase()}:`);
     console.log('                  ✈️   ALL FLIGHTS   ✈️                       ');
@@ -40,7 +38,7 @@ const showAllFlights = () => {
     for (i = 0; i < flights.length; i++) {
         if (flights[i].layover === true) { 
             console.log(`El vuelo CON ESCALA con ID: ${flights[i].id}, de ORIGEN en ${flights[i].from} y DESTINO en ${flights[i].to}, tiene un COSTE de ${flights[i].cost}€`);
-        } else { // Aquí estamos imprimiendo los que NO HACEN ESCALA.
+        } else { 
             console.log(`El vuelo DIRECTO con ID: ${flights[i].id}, de ORIGEN en ${flights[i].from} y DESTINO en ${flights[i].to}, tiene un COSTE de ${flights[i].cost}€`);
         };
     };
@@ -48,7 +46,6 @@ const showAllFlights = () => {
 };
 
 showAllFlights();
-
 
 
 const averageCost = () => {
@@ -61,7 +58,6 @@ const averageCost = () => {
 
 
 averageCost();
-
 
 
 const layoverFlights = () => {
@@ -84,7 +80,6 @@ const layoverFlights = () => {
 layoverFlights();
 
 
-
 const lastFlights = () => {
     for (i = 0; i < flights.length; i++) {
         if (flights[i].id > 4) {
@@ -92,7 +87,7 @@ const lastFlights = () => {
         };
     };
     alert(`Por último, le indicamos cuáles son los últimos ${allLastFlights} vuelos del día y sus destinos: `);
-    console.log('                  ✈️   LAST FLIGHTS   ✈️                      ');
+    console.log('                 ⌛    LAST FLIGHTS    ⌛                      ');
     for (i = 0; i < flights.length; i++) {
         if (flights[i].id > 4) {
             console.log(`El vuelo con ID: ${flights[i].id} tiene DESTINO en ${flights[i].to}`);
@@ -103,3 +98,167 @@ const lastFlights = () => {
 
 
 lastFlights(); 
+
+
+let askRole = '';
+let chooseAdmin = '';
+let chooseUser = '';
+let newTO = '';
+let newFROM = '';
+let newCOST = '';
+let newLayover = '';
+let maxFlights = 15;
+let removeOneFlight = '';
+let costFlight = '';
+
+
+
+const askAdminUser = () => {
+    askRole = prompt('Por favor, indíquenos si es ADMIN (🔒) o USER, (🙍️) o si desea SALIR del programa');
+    switch(askRole) {
+        case "ADMIN":
+            isAdmin();
+            break
+        case "USER": 
+            isUser();
+            break
+        case "SALIR": 
+            isExit();
+            break
+        default:
+            alert('Error 404: Not Found! Por favor, introduzca ADMIN USER o SALIR');
+            askAdminUser();
+    };
+};
+
+
+const isAdmin = () => {
+    alert(`ID: Bienvenid@, 🔒 ADMINISTRADOR 🔒`)
+    chooseAdmin = prompt('¿Desea CREAR, ELIMINAR algún vuelo o SALIR?');
+    switch(chooseAdmin) {
+        case "CREAR":
+            creationFlights();
+            break
+        case "ELIMINAR":
+            deleteFlights();
+            break
+        case "SALIR":
+            isExit();
+            break
+        default:
+            alert('Error 404: Not Found! Por favor, introduzca CREAR, ELIMINAR o SALIR');
+            isAdmin();
+    };
+};
+
+
+const creationFlights = () => {
+    if (maxFlights === flights.length) {
+        alert('Lo sentimos pero ha alcanzado el número máximo de vuelos creados disponibles...');
+        isAdmin();
+        return;
+    };
+    alert('¡Empecemos creando un nuevo vuelo!');
+    newFROM = prompt(`Vuelo Nº ${flights[flights.length - 1].id + 1}: Indíquenos cuál va a ser el ORIGEN del nuevo vuelo`);
+    newTO = prompt(`Vuelo Nº ${flights[flights.length - 1].id + 1}: Ahora, escoja su próximo DESTINO`);
+    newCOST = prompt(`Vuelo Nº ${flights[flights.length - 1].id + 1}: Indique el coste de su nuevo vuelo`);
+    newLayover = confirm(`¿El vuelo Nº ${flights[flights.length - 1].id + 1} tiene ESCALA (ACEPTAR) o es un vuelo directo (CANCELAR)?`);
+    if (newLayover === true) {
+        newLayover = true;
+    } else {
+        newLayover = false;
+    };
+    flights.push({ id : flights[flights.length - 1].id + 1, to : newTO, from : newFROM, cost : newCOST, layover : newLayover });
+    alert('¡El vuelo creado saldrá en pantalla!');
+    console.log('¡VUELO CREADO! ✅ : ');
+    if (newLayover === true) {
+        console.log(`El vuelo "CON ESCALA", con ID: ${flights[flights.length - 1].id}, de ORIGEN en ${newFROM} y DESTINO en ${newTO}, tiene un COSTE de ${newCOST}€`);
+    } else {
+        console.log(`El vuelo "SIN ESCALA", con ID: ${flights[flights.length - 1].id}, de ORIGEN en ${newFROM} y DESTINO en ${newTO}, tiene un COSTE de ${newCOST}€`);
+    };
+    console.log('---------------------------------------------------------------');
+    let anotherOperation = confirm('Para CREAR otro vuelo pulse "ACEPTAR" o "CANCELAR" para salir');
+    if (anotherOperation === true) {
+        creationFlights();
+    } else {
+        isAdmin();
+    };
+};
+
+
+const deleteFlights = () => {
+    removeOneFlight = prompt('Introduce el ID del vuelo que deseas eliminar: ');
+    if (removeOneFlight > flights.length || removeOneFlight <= 0 ) {
+        alert('El vuelo indicado no existe, por favor, introduzca uno de los vuelos disponibles');
+        deleteFlights();
+        return;
+    };
+    flights.splice(removeOneFlight, 1);
+    alert(`El vuelo con ID ${removeOneFlight} ha sido eliminado`);
+    showAllFlights();
+    let continueRemoveFlights = confirm('Para ELIMINAR otro vuelo pulse "ACEPTAR" o "CANCELAR" para SALIR');
+    if (continueRemoveFlights === true) {
+        deleteFlights();
+    } else {
+        isAdmin();
+    };
+};
+
+
+const isUser = () => {
+    alert(`ID: Bienvenid@, 🙍‍♂️ USUARIO 🙍‍♂️`);
+    chooseUser = prompt('¿Desea BUSCAR algún vuelo según su precio o SALIR?')
+    switch(chooseUser) {
+        case "BUSCAR":
+            shearchPrice();
+            break
+        case "SALIR":
+            isExit();
+            break
+        default:
+            alert('Error 404: Not Found! Por favor, introduzca BUSCAR o SALIR');
+            isUser();
+    };
+};
+
+
+const shearchPrice = () => {
+    costFlight = prompt('Indíquenos un precio medio para poderle buscar un vuelo: ');
+    if (costFlight === '' || costFlight === null) {
+        alert('Por favor, ingrese una cantidad');
+        shearchPrice();
+    };
+    alert(`Estos son todos los vuelos que tenemos disponibles a ese precio,${userName} : `);
+    console.log('                  💵   PRICES   💵                       ');
+    console.log('---------------------------------------------------------------');    
+    for (i = 0; i < flights.length; i++) {
+        if (flights[i].cost === costFlight) {
+            console.log(`Por ${costFlight}€ disponemos del vuelo CON ESCALA con ID: ${flights[i].id}, de ORIGEN en ${flights[i].from} y DESTINO en ${flights[i].to}.`);
+        } else if (flights[i].cost < costFlight) {
+            console.log('No disponemos de ningún vuelo por ese precio en concreto, pero le mostramos algunos más baratos:');
+            console.log(`El vuelo CON ESCALA con ID: ${flights[i].id}, de ORIGEN en ${flights[i].from} y DESTINO en ${flights[i].to}, tiene un COSTE de ${flights[i].cost}€`);
+            console.log('---------------------------------------------------------------');    
+        } else { 
+            console.log('Lo sentimos, pero no tenemos disponible ningún vuelo con ese precio');
+        };
+    };
+    let continueShearchFlights = confirm('Para seguir BUSCANDO más vuelos pulse "ACEPTAR" o "CANCELAR" para SALIR');
+    if (continueShearchFlights === true) {
+        shearchPrice();
+    } else {
+        isUser();
+    };
+};
+
+
+const isExit = () => {
+    let sayExit = confirm('Pulse ACEPTAR si desea salir del programa o CANCELAR para realizar alguna otra operación');
+    if (sayExit === true) {
+        alert(`Gracias por confiar en CODER Airlines. ¡Hasta la próxima, ${userName.toUpperCase()}! 👋`);
+    } else {
+        askAdminUser();
+    };
+};
+
+
+askAdminUser();
