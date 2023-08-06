@@ -1,10 +1,10 @@
 let userName = '';
-let totalCost = 0; 
+let totalCost = 0;
 let allLayoverFlights = 0;
-let allLastFlights = 0;   
+let allLastFlights = 0;
 
 
-const flights = [  
+const flights = [
     { id: 00, to: "New York", from: "Barcelona", cost: 700, layover: false },
     { id: 01, to: "Los Angeles", from: "Madrid", cost: 1100, layover: true },
     { id: 02, to: "Paris", from: "Barcelona", cost: 210, layover: false },
@@ -28,6 +28,7 @@ const askUserName = () => {
     };
 };
 
+
 askUserName();
 
 
@@ -36,14 +37,15 @@ const showAllFlights = () => {
     console.log('                  ✈️   ALL FLIGHTS   ✈️                       ');
     console.log('---------------------------------------------------------------');
     for (i = 0; i < flights.length; i++) {
-        if (flights[i].layover === true) { 
+        if (flights[i].layover === true) {
             console.log(`El vuelo CON ESCALA con ID: ${flights[i].id}, de ORIGEN en ${flights[i].from} y DESTINO en ${flights[i].to}, tiene un COSTE de ${flights[i].cost}€`);
-        } else { 
+        } else {
             console.log(`El vuelo DIRECTO con ID: ${flights[i].id}, de ORIGEN en ${flights[i].from} y DESTINO en ${flights[i].to}, tiene un COSTE de ${flights[i].cost}€`);
         };
     };
     console.log('---------------------------------------------------------------');
 };
+
 
 showAllFlights();
 
@@ -110,7 +112,6 @@ let newLayover = '';
 let maxFlights = 15;
 let removeOneFlight = '';
 let costFlight = '';
-
 
 
 const askAdminUser = () => {
@@ -205,6 +206,7 @@ const deleteFlights = () => {
 };
 
 
+
 const isUser = () => {
     alert(`ID: Bienvenid@, 🙍‍♂️ USUARIO 🙍‍♂️`);
     chooseUser = prompt('¿Desea BUSCAR algún vuelo según su precio o SALIR?')
@@ -224,24 +226,25 @@ const isUser = () => {
 
 const shearchPrice = () => {
     costFlight = prompt('Indíquenos un precio medio para poderle buscar un vuelo: ');
-    if (costFlight === '' || costFlight === null) {
+    if (costFlight === '' || costFlight <= 0) {
         alert('Por favor, ingrese una cantidad');
         shearchPrice();
+        return;
     };
-    alert(`Estos son todos los vuelos que tenemos disponibles a ese precio,${userName} : `);
-    console.log('                  💵   PRICES   💵                       ');
+    alert(`Estos son todos los vuelos que tenemos disponibles a ese precio, ${userName.toUpperCase()} : `);
+    console.log('                      💵   PRICES   💵                       ');
     console.log('---------------------------------------------------------------');    
     for (i = 0; i < flights.length; i++) {
-        if (flights[i].cost === costFlight) {
-            console.log(`Por ${costFlight}€ disponemos del vuelo CON ESCALA con ID: ${flights[i].id}, de ORIGEN en ${flights[i].from} y DESTINO en ${flights[i].to}.`);
-        } else if (flights[i].cost < costFlight) {
-            console.log('No disponemos de ningún vuelo por ese precio en concreto, pero le mostramos algunos más baratos:');
-            console.log(`El vuelo CON ESCALA con ID: ${flights[i].id}, de ORIGEN en ${flights[i].from} y DESTINO en ${flights[i].to}, tiene un COSTE de ${flights[i].cost}€`);
-            console.log('---------------------------------------------------------------');    
-        } else { 
-            console.log('Lo sentimos, pero no tenemos disponible ningún vuelo con ese precio');
+        if (costFlight >= flights[i].cost) {
+            console.log(`El vuelo ${flights[i].from} - ${flights[i].to}, tiene un COSTE de ${flights[i].cost}€`);
         };
     };
+    for (k = 0; k < flights.length; k++) {
+        if (costFlight < 90) {
+            console.log('Lo sentimos, pero no tenemos disponible ningún vuelo con ese precio.');
+        };
+    };
+    console.log('---------------------------------------------------------------');
     let continueShearchFlights = confirm('Para seguir BUSCANDO más vuelos pulse "ACEPTAR" o "CANCELAR" para SALIR');
     if (continueShearchFlights === true) {
         shearchPrice();
