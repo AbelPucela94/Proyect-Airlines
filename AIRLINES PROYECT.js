@@ -50,7 +50,7 @@ const showAllFlights = () => {
 showAllFlights();
 
 
-const averageCost = () => {
+const getAverageCost = () => {
     for (i = 0; i < flights.length; i++) {
         totalCost = totalCost + flights[i].cost;
     };
@@ -59,10 +59,10 @@ const averageCost = () => {
 };
 
 
-averageCost();
+getAverageCost();
 
 
-const layoverFlights = () => {
+const getLayoverFlights = () => {
     for (i = 0; i < flights.length; i++) {
         if (flights[i].layover === true) {
             allLayoverFlights = allLayoverFlights + 1;
@@ -79,10 +79,10 @@ const layoverFlights = () => {
 };
 
 
-layoverFlights();
+getLayoverFlights();
 
 
-const lastFlights = () => {
+const getLastFlights = () => {
     for (i = 0; i < flights.length; i++) {
         if (flights[i].id > 4) {
             allLastFlights = allLastFlights + 1;
@@ -99,7 +99,7 @@ const lastFlights = () => {
 };
 
 
-lastFlights(); 
+getLastFlights(); 
 
 
 let askRole = '';
@@ -153,7 +153,7 @@ const isAdmin = () => {
 };
 
 
-const creationFlights = () => {
+const createFlights = () => {
     if (maxFlights === flights.length) {
         alert('Lo sentimos pero ha alcanzado el número máximo de vuelos creados disponibles...');
         isAdmin();
@@ -180,7 +180,7 @@ const creationFlights = () => {
     console.log('---------------------------------------------------------------');
     let anotherOperation = confirm('Para CREAR otro vuelo pulse "ACEPTAR" o "CANCELAR" para salir');
     if (anotherOperation === true) {
-        creationFlights();
+        createFlights();
     } else {
         isAdmin();
     };
