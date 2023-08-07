@@ -188,13 +188,20 @@ const createFlights = () => {
 
 
 const deleteFlights = () => {
-    removeOneFlight = prompt('Introduce el ID del vuelo que deseas eliminar: ');
-    if (removeOneFlight > flights.length || removeOneFlight < 0 ) {
-        alert('El vuelo indicado no existe, por favor, introduzca uno de los vuelos disponibles');
+    const validFlight = flights.map(flight => flight.id);
+    removeOneFlight = parseInt(prompt(`Introduce el ID del vuelo que deseas eliminar: `));
+    if (isNaN(removeOneFlight) || removeOneFlight === '') {
+        alert('Por favor, ingrese un ID de vuelo válido.');
         deleteFlights();
         return;
     };
-    flights.splice(removeOneFlight, 1);
+    if (!validFlight.includes(removeOneFlight)) {
+        alert('El vuelo indicado no existe, por favor, introduzca uno de los vuelos disponibles.');
+        deleteFlights();
+        return;
+    };
+    const indexDelete = flights.findIndex(flight => flight.id === removeOneFlight);
+    flights.splice(indexDelete, 1);
     alert(`El vuelo con ID ${removeOneFlight} ha sido eliminado`);
     showAllFlights();
     let continueRemoveFlights = confirm('Para ELIMINAR otro vuelo pulse "ACEPTAR" o "CANCELAR" para SALIR');
@@ -204,7 +211,6 @@ const deleteFlights = () => {
         isAdmin();
     };
 };
-
 
 
 const isUser = () => {
@@ -225,8 +231,8 @@ const isUser = () => {
 
 
 const shearchPrice = () => {
-    costFlight = prompt('Indíquenos un precio medio para poderle buscar un vuelo: ');
-    if (costFlight === '' || costFlight <= 0) {
+    costFlight = parseInt(prompt('Indíquenos un precio medio para poderle buscar un vuelo: '));
+    if (costFlight === '' || isNaN(costFlight)) {
         alert('Por favor, ingrese una cantidad');
         shearchPrice();
         return;
