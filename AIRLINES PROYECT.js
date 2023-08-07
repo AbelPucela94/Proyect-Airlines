@@ -138,7 +138,7 @@ const isAdmin = () => {
     chooseAdmin = prompt('¿Desea CREAR, ELIMINAR algún vuelo o SALIR?');
     switch(chooseAdmin) {
         case "CREAR":
-            creationFlights();
+            createFlights();
             break
         case "ELIMINAR":
             deleteFlights();
