@@ -189,7 +189,7 @@ const createFlights = () => {
 
 const deleteFlights = () => {
     removeOneFlight = prompt('Introduce el ID del vuelo que deseas eliminar: ');
-    if (removeOneFlight > flights.length || removeOneFlight <= 0 ) {
+    if (removeOneFlight > flights.length || removeOneFlight < 0 ) {
         alert('El vuelo indicado no existe, por favor, introduzca uno de los vuelos disponibles');
         deleteFlights();
         return;
